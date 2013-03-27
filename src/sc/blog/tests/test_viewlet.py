@@ -2,11 +2,11 @@
 
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from Products.Five.browser import BrowserView as View
 from sc.blog.interfaces import IBlogLayer
 from sc.blog.testing import INTEGRATION_TESTING
 from zope.component import queryMultiAdapter
 from zope.interface import alsoProvides
+from zope.publisher.browser import BrowserView as View
 from zope.viewlet.interfaces import IViewletManager
 
 import unittest
