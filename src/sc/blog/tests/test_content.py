@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from sc.blog.content import IBlog
+from sc.blog.browser import post
 from sc.blog.testing import INTEGRATION_TESTING
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
@@ -9,8 +10,11 @@ from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
 from zope.component import createObject
 from zope.component import queryUtility
+from zope.interface import alsoProvides
+from collective.nitf.interfaces import INITFLayer
 
 import unittest
+from sc.blog.interfaces import IBlogSkin
 
 
 class ContentTypeTestCase(unittest.TestCase):
@@ -49,3 +53,17 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_is_referenceable(self):
         self.assertTrue(IReferenceable.providedBy(self.b1))
         self.assertTrue(IAttributeUUID.providedBy(self.b1))
+
+    def test_post_view(self):
+        self.b1.invokeFactory('collective.nitf.content', 'n1')
+        # provide the nitf layer...
+        alsoProvides(self.layer['request'], INITFLayer)
+        view = self.b1.n1.unrestrictedTraverse("view")
+        # nitf standard view
+        self.assertFalse(isinstance(view, post.View))
+        # XXX: simulate a traverse
+        self.layer['request']['TraversalRequestNameStack'] = []
+        self.b1.__before_publishing_traverse__(self.layer['request'])        
+        view = self.b1.n1.unrestrictedTraverse("view")
+        # nitf post view
+        self.assertTrue(isinstance(view, post.View))
