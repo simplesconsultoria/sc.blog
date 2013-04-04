@@ -6,13 +6,7 @@ Because you have to know where your towel is.
 1.0a2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
-
-
-1.0a1 (2013-03-15)
-^^^^^^^^^^^^^^^^^^
-
-- Nothing changed yet.
+- Disallow comments on blogs by default as users comment on posts. [hvelarde]
 
 
 1.0a1 (2013-03-15)
