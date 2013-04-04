@@ -3,7 +3,7 @@ Changelog
 
 Because you have to know where your towel is.
 
-1.0a2 (unreleased)
+1.0a2 (2013-04-04)
 ^^^^^^^^^^^^^^^^^^
 
 - Fix batch size and ordering of posts on blogs. Now up to 10 posts are shown
