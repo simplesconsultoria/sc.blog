@@ -6,6 +6,9 @@ Because you have to know where your towel is.
 1.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Refactor template of blog header: now it will display the blog image, if
+  present, or the blog title, if not. [hvelarde]
+
 - Image field is no longer required by default. [hvelarde]
 
 - In order to fix viewlet ordering in plone.abovecontent we had to register

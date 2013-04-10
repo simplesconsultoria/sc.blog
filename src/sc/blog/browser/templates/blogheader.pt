@@ -7,12 +7,17 @@
 <body>
 
 <tal:viewlet condition="viewlet/available">
-  <div tal:define="blog viewlet/blog;
-                   image nocall:blog/image"
-      tal:condition="nocall:image">
-    <a href="" tal:attributes="href viewlet/blog_url">
-      <img tal:define="scale blog/@@images"
+  <div id="blog-header"
+      tal:define="blog viewlet/blog;
+                  blog_title blog/Title;
+                  blog_url viewlet/blog_url;
+                  image nocall:blog/image|nothing;
+                  scale blog/@@images">
+    <a href="" title="" tal:attributes="href blog_url; title blog_title">
+      <img tal:condition="image"
           tal:replace="structure python: scale.scale('image').tag()" />
+      <span tal:condition="not: image"
+          tal:replace="blog_title" />
     </a>
   </div>
 </tal:viewlet>
