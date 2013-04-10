@@ -29,7 +29,9 @@ class ViewletTestCase(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Member'])
         self.folder = self.portal['test-folder']
 
-    def _get_viewlet_manager(self, context, request):
+    def _get_viewlet_manager(self, context, request=None):
+        if request is None:
+            request = self.request
         view = View(context, request)
         manager = queryMultiAdapter(
             (context, request, view), IViewletManager, 'plone.abovecontent')
@@ -38,8 +40,7 @@ class ViewletTestCase(unittest.TestCase):
 
     def test_viewlet_is_registered(self):
         context = self.portal
-        request = self.request
-        manager = self._get_viewlet_manager(context, request)
+        manager = self._get_viewlet_manager(context)
         self.assertTrue(manager)
 
         manager.update()
@@ -48,8 +49,7 @@ class ViewletTestCase(unittest.TestCase):
     def test_viewlet_is_available_on_blogs(self):
         self.folder.invokeFactory('Blog', 'blog')
         context = self.folder['blog']
-        request = self.request
-        manager = self._get_viewlet_manager(context, request)
+        manager = self._get_viewlet_manager(context)
 
         manager.update()
         viewlet = manager['sc.blog.blogheader']
@@ -62,8 +62,7 @@ class ViewletTestCase(unittest.TestCase):
         self.blog = self.folder['blog']
         self.blog.invokeFactory('collective.nitf.content', 'post')
         context = self.blog['post']
-        request = self.request
-        manager = self._get_viewlet_manager(context, request)
+        manager = self._get_viewlet_manager(context)
 
         manager.update()
         viewlet = manager['sc.blog.blogheader']
@@ -73,22 +72,20 @@ class ViewletTestCase(unittest.TestCase):
     def test_viewlet_is_not_available_on_news_articles(self):
         self.folder.invokeFactory('collective.nitf.content', 'n1')
         context = self.folder['n1']
-        request = self.request
-        manager = self._get_viewlet_manager(context, request)
+        manager = self._get_viewlet_manager(context)
 
         manager.update()
         viewlet = manager['sc.blog.blogheader']
         viewlet.update()
         self.assertFalse(viewlet.available())
 
-    def test_blog_urg(self):
+    def test_blog_url(self):
         self.folder.invokeFactory('Blog', 'blog')
         blog_url = 'http://nohost/plone/test-folder/blog'
 
         # first test in the context of a blog
         context = self.folder['blog']
-        request = self.request
-        manager = self._get_viewlet_manager(context, request)
+        manager = self._get_viewlet_manager(context)
 
         manager.update()
         viewlet = manager['sc.blog.blogheader']
@@ -98,7 +95,7 @@ class ViewletTestCase(unittest.TestCase):
         # now test in the context of a post
         self.folder.blog.invokeFactory('collective.nitf.content', 'post')
         context = self.folder.blog['post']
-        manager = self._get_viewlet_manager(context, request)
+        manager = self._get_viewlet_manager(context)
 
         manager.update()
         viewlet = manager['sc.blog.blogheader']
