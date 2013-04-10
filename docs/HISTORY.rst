@@ -3,7 +3,7 @@ Changelog
 
 Because you have to know where your towel is.
 
-1.0a3 (unreleased)
+1.0a3 (2013-04-10)
 ^^^^^^^^^^^^^^^^^^
 
 - Refactor template of blog header: now it will display the blog image, if
