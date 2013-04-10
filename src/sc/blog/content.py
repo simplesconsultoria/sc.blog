@@ -24,7 +24,8 @@ class IBlog(form.Schema):
     )
 
     image = NamedBlobImage(
-        title=_(u"Image")
+        title=_(u"Image"),
+        required=False,
     )
 
 
