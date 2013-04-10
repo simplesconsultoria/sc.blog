@@ -11,8 +11,8 @@ Because you have to know where your towel is.
 
 - Image field is no longer required by default. [hvelarde]
 
-- In order to fix viewlet ordering in plone.abovecontent we had to register
-  the plone.path_bar viewlet before everything and then register the
+- In order to fix ordering in plone.abovecontent viewlet manager, we had to
+  register the plone.path_bar viewlet before everything and then register the
   sc.blog.blogheader viewlet after everything. [hvelarde]
 
 
