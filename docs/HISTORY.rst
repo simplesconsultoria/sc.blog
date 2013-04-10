@@ -6,7 +6,9 @@ Because you have to know where your towel is.
 1.0a3 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- In order to fix viewlet ordering in plone.abovecontent we had to register
+  the plone.path_bar viewlet before everything and then register the
+  sc.blog.blogheader viewlet after everything. [hvelarde]
 
 
 1.0a2 (2013-04-04)

@@ -46,6 +46,16 @@ class ViewletTestCase(unittest.TestCase):
         manager.update()
         self.assertIn('sc.blog.blogheader', manager)
 
+    def test_viewlet_order(self):
+        context = self.portal
+        manager = self._get_viewlet_manager(context)
+
+        manager.update()
+        self.assertEqual(len(manager.viewlets), 2)
+        viewlets = [v.__name__ for v in manager.viewlets]
+        self.assertListEqual(viewlets,
+                             [u'plone.path_bar', u'sc.blog.blogheader'])
+
     def test_viewlet_is_available_on_blogs(self):
         self.folder.invokeFactory('Blog', 'blog')
         context = self.folder['blog']
