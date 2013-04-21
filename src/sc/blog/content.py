@@ -11,9 +11,6 @@ from zope.interface import alsoProvides, noLongerProvides
 from collective.nitf.interfaces import INITFLayer
 
 
-grok.templatedir('templates')
-
-
 class IBlog(form.Schema):
     """A Blog.
     """
