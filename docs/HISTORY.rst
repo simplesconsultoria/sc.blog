@@ -6,7 +6,8 @@ Because you have to know where your towel is.
 1.0a4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- Register static resource directory manually as Grok no longer does it.
+  Package is now Plone 4.3 compatible. [hvelarde]
 
 
 1.0a3 (2013-04-10)
