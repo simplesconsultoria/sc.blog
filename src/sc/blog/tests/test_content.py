@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
 
-from sc.blog.content import IBlog
-from sc.blog.browser import post
-from sc.blog.testing import INTEGRATION_TESTING
+from collective.nitf.interfaces import INITFLayer
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
+from sc.blog.browser import post
+from sc.blog.content import IBlog
+from sc.blog.testing import INTEGRATION_TESTING
 from zope.component import createObject
 from zope.component import queryUtility
 from zope.interface import alsoProvides
-from collective.nitf.interfaces import INITFLayer
 
 import unittest
-from sc.blog.interfaces import IBlogSkin
 
 
 class ContentTypeTestCase(unittest.TestCase):
@@ -63,7 +62,7 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertFalse(isinstance(view, post.View))
         # XXX: simulate a traverse
         self.layer['request']['TraversalRequestNameStack'] = []
-        self.b1.__before_publishing_traverse__(self.layer['request'])        
+        self.b1.__before_publishing_traverse__(self.layer['request'])
         view = self.b1.n1.unrestrictedTraverse("view")
         # nitf post view
         self.assertTrue(isinstance(view, post.View))

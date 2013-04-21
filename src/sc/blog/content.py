@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from collective.nitf.interfaces import INITFLayer
 from five import grok
 from plone.dexterity.content import Container
 from plone.directives import form
 from plone.namedfile.field import NamedBlobImage
 from sc.blog import _
-from zope import schema
 from sc.blog.interfaces import IBlogSkin
-from zope.interface import alsoProvides, noLongerProvides
-from collective.nitf.interfaces import INITFLayer
+from zope import schema
+from zope.interface import alsoProvides
+from zope.interface import noLongerProvides
 
 
 class IBlog(form.Schema):
