@@ -15,7 +15,6 @@ eggs/
 include/
 lib/
 local.cfg
-parts/
-src/collective.nitf/
-var/
 Makefile
+parts/
+var/
