@@ -3,7 +3,7 @@ Changelog
 
 Because you have to know where your towel is.
 
-1.0a4 (unreleased)
+1.0a4 (2013-05-02)
 ^^^^^^^^^^^^^^^^^^
 
 - Register static resource directory manually as Grok no longer does it.
