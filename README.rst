@@ -11,7 +11,7 @@ This package includes a content type, views and viewlets to represent a blog
 inside a Plone site.
 
 Posts are represented by instances of News Articles as defined in the
-`collective.nitf` package.
+`collective.nitf`_ package.
 
 Don't Panic
 -----------
