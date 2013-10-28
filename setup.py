@@ -46,7 +46,6 @@ setup(name='sc.blog',
       zip_safe=False,
       install_requires=[
           'Acquisition',
-          'collective.nitf',
           'five.grok',
           'Pillow',
           'plone.app.dexterity [grok, relations]',
