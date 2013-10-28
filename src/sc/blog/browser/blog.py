@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
-from collective.nitf.content import INITF
 from five import grok
 from plone.app.layout.viewlets.interfaces import IAboveContent
 from plone.directives import dexterity
 from sc.blog.content import IBlog
 from sc.blog.interfaces import IBlogLayer
 from zope.interface import Interface
+from Products.CMFCore.utils import getToolByName
 
 grok.templatedir('templates')
 
@@ -20,6 +20,12 @@ class View(dexterity.DisplayForm):
     grok.template('folder_full_view')
     grok.require('zope2.View')
 
+    def query_portal_types(self):
+        plone_utils = getToolByName(self.context, 'plone_utils')
+        types = plone_utils.getUserFriendlyTypes()
+        for t in ('Image', 'File', 'Folder'):  # XXX: hardcoded, please improve
+            types.remove(t)
+        return types
 
 class BlogSummaryView(dexterity.DisplayForm):
     """Looks like a standard Folder Summary View.
@@ -45,18 +51,18 @@ class BlogHeader(grok.Viewlet):
         self.context = aq_inner(self.context)
         # is context a Blog?
         self.is_blog = IBlog.providedBy(self.context)
-        # is context a News Article inside a Blog?
-        self.is_post = INITF.providedBy(self.context) and \
-            IBlog.providedBy(self.context.__parent__)
+        # # is context a News Article inside a Blog?
+        # self.is_post = INITF.providedBy(self.context) and \
+        #     IBlog.providedBy(self.context.__parent__)
 
     def available(self):
-        return self.is_blog or self.is_post
+        return self.is_blog  # or self.is_post
 
     def blog(self):
         if self.is_blog:
             return self.context
-        if self.is_post:
-            return self.context.__parent__
+        # if self.is_post:
+        #     return self.context.__parent__
 
     def blog_url(self):
         return self.blog().absolute_url()

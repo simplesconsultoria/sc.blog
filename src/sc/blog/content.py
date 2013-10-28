@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from collective.nitf.interfaces import INITFLayer
+# from collective.nitf.interfaces import INITFLayer
 from five import grok
 from plone.dexterity.content import Container
 from plone.directives import form
@@ -32,16 +32,16 @@ class Blog(Container):
     """
     grok.implements(IBlog)
 
-    def __before_publishing_traverse__(self, arg1, arg2=None):
-        """ Pre-traversal hook.
-        """
-        # XXX hack around a bug(?) in BeforeTraverse.MultiHook
-        REQUEST = arg2 or arg1
+    # def __before_publishing_traverse__(self, arg1, arg2=None):
+    #     """ Pre-traversal hook.
+    #     """
+    #     # XXX hack around a bug(?) in BeforeTraverse.MultiHook
+    #     REQUEST = arg2 or arg1
 
-        # XXX reorder interfaces
-        noLongerProvides(REQUEST, INITFLayer)
-        alsoProvides(REQUEST, IBlogSkin)
-        alsoProvides(REQUEST, INITFLayer)
+    #     # XXX reorder interfaces
+    #     noLongerProvides(REQUEST, INITFLayer)
+    #     alsoProvides(REQUEST, IBlogSkin)
+    #     alsoProvides(REQUEST, INITFLayer)
 
-        super(Container,
-              self).__before_publishing_traverse__(arg1, arg2)
+    #     super(Container,
+    #           self).__before_publishing_traverse__(arg1, arg2)
