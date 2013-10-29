@@ -8,7 +8,7 @@
 
 <tal:viewlet condition="viewlet/available">
   <div id="blog-header"
-      tal:define="blog viewlet/blog;
+      tal:define="blog nocall:viewlet/blog;
                   blog_title blog/Title;
                   blog_url viewlet/blog_url;
                   image nocall:blog/image|nothing;
