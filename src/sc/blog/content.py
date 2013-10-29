@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# from collective.nitf.interfaces import INITFLayer
 from five import grok
 from plone.dexterity.content import Container
 from plone.directives import form
