@@ -8,6 +8,7 @@ from sc.blog.content import IBlog
 from sc.blog.interfaces import IBlogLayer
 from zope.interface import Interface
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.interfaces import ISiteRoot
 
 grok.templatedir('templates')
 
@@ -49,20 +50,17 @@ class BlogHeader(grok.Viewlet):
 
     def update(self):
         self.context = aq_inner(self.context)
-        # is context a Blog?
-        self.is_blog = IBlog.providedBy(self.context)
-        # # is context a News Article inside a Blog?
-        # self.is_post = INITF.providedBy(self.context) and \
-        #     IBlog.providedBy(self.context.__parent__)
+        self.blog = None
+        # is context a Blog or inside a Blog?
+        for ob in self.context.aq_chain:
+            if ISiteRoot.providedBy(ob):
+                break
+            if IBlog.providedBy(ob):
+                self.blog = ob
+                break
 
     def available(self):
-        return self.is_blog  # or self.is_post
-
-    def blog(self):
-        if self.is_blog:
-            return self.context
-        # if self.is_post:
-        #     return self.context.__parent__
+        return bool(self.blog)
 
     def blog_url(self):
-        return self.blog().absolute_url()
+        return self.blog.absolute_url()

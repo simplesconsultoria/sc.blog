@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from collective.nitf.interfaces import INITFLayer
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -52,17 +51,3 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_is_referenceable(self):
         self.assertTrue(IReferenceable.providedBy(self.b1))
         self.assertTrue(IAttributeUUID.providedBy(self.b1))
-
-    def test_post_view(self):
-        self.b1.invokeFactory('collective.nitf.content', 'n1')
-        # provide the nitf layer...
-        alsoProvides(self.layer['request'], INITFLayer)
-        view = self.b1.n1.unrestrictedTraverse("view")
-        # nitf standard view
-        self.assertFalse(isinstance(view, post.View))
-        # XXX: simulate a traverse
-        self.layer['request']['TraversalRequestNameStack'] = []
-        self.b1.__before_publishing_traverse__(self.layer['request'])
-        view = self.b1.n1.unrestrictedTraverse("view")
-        # nitf post view
-        self.assertTrue(isinstance(view, post.View))

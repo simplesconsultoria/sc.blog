@@ -67,10 +67,10 @@ class ViewletTestCase(unittest.TestCase):
         self.assertTrue(viewlet.available())
 
     def test_viewlet_is_available_on_posts(self):
-        # a post, is a News Article inside a Blog
+        # a post, is almost everything inside a Blog
         self.folder.invokeFactory('Blog', 'blog')
         self.blog = self.folder['blog']
-        self.blog.invokeFactory('collective.nitf.content', 'post')
+        self.blog.invokeFactory('News Item', 'post')
         context = self.blog['post']
         manager = self._get_viewlet_manager(context)
 
@@ -78,16 +78,6 @@ class ViewletTestCase(unittest.TestCase):
         viewlet = manager['sc.blog.blogheader']
         viewlet.update()
         self.assertTrue(viewlet.available())
-
-    def test_viewlet_is_not_available_on_news_articles(self):
-        self.folder.invokeFactory('collective.nitf.content', 'n1')
-        context = self.folder['n1']
-        manager = self._get_viewlet_manager(context)
-
-        manager.update()
-        viewlet = manager['sc.blog.blogheader']
-        viewlet.update()
-        self.assertFalse(viewlet.available())
 
     def test_blog_url(self):
         self.folder.invokeFactory('Blog', 'blog')
@@ -103,7 +93,7 @@ class ViewletTestCase(unittest.TestCase):
         self.assertEqual(viewlet.blog_url(), blog_url)
 
         # now test in the context of a post
-        self.folder.blog.invokeFactory('collective.nitf.content', 'post')
+        self.folder.blog.invokeFactory('News Item', 'post')
         context = self.folder.blog['post']
         manager = self._get_viewlet_manager(context)
 
