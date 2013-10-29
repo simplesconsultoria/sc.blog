@@ -54,6 +54,9 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IAttributeUUID.providedBy(self.b1))
 
     def test_subblog(self):
+        request = self.layer['request']
         # Blogs can't contain Blogs
-        self.assertTrue('Blog' in [i.id for i in _allowedTypes(self.layer['request'], self.folder)])
-        self.assertFalse('Blog' in [i.id for i in _allowedTypes(self.layer['request'], self.b1)])
+        self.assertTrue('Blog' in [i.id for i in _allowedTypes(request, self.folder)])
+        self.assertFalse('Blog' in [i.id for i in _allowedTypes(request, self.b1)])
+        self.b1.invokeFactory('Folder', 'subfolder')
+        self.assertFalse('Blog' in [i.id for i in _allowedTypes(request, self.b1.subfolder)])
