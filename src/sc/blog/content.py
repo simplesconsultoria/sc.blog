@@ -32,20 +32,6 @@ class Blog(Container):
     """
     grok.implements(IBlog)
 
-    # def __before_publishing_traverse__(self, arg1, arg2=None):
-    #     """ Pre-traversal hook.
-    #     """
-    #     # XXX hack around a bug(?) in BeforeTraverse.MultiHook
-    #     REQUEST = arg2 or arg1
-
-    #     # XXX reorder interfaces
-    #     noLongerProvides(REQUEST, INITFLayer)
-    #     alsoProvides(REQUEST, IBlogSkin)
-    #     alsoProvides(REQUEST, INITFLayer)
-
-    #     super(Container,
-    #           self).__before_publishing_traverse__(arg1, arg2)
-
 
 def blog_added(ob, event):
     # inside blogs you can't add blogs
