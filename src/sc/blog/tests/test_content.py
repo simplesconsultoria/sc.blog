@@ -5,12 +5,12 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
-from sc.blog.browser import post
 from sc.blog.content import IBlog
 from sc.blog.testing import INTEGRATION_TESTING
 from zope.component import createObject
 from zope.component import queryUtility
 from zope.interface import alsoProvides
+from plone.app.content.browser.folderfactories import _allowedTypes
 
 import unittest
 
@@ -51,3 +51,11 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_is_referenceable(self):
         self.assertTrue(IReferenceable.providedBy(self.b1))
         self.assertTrue(IAttributeUUID.providedBy(self.b1))
+
+    def test_subblog(self):
+        request = self.layer['request']
+        # Blogs can't contain Blogs
+        self.assertTrue('Blog' in [i.id for i in _allowedTypes(request, self.folder)])
+        self.assertFalse('Blog' in [i.id for i in _allowedTypes(request, self.b1)])
+        self.b1.invokeFactory('Folder', 'subfolder')
+        self.assertFalse('Blog' in [i.id for i in _allowedTypes(request, self.b1.subfolder)])
