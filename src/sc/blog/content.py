@@ -45,3 +45,9 @@ class Blog(Container):
 
     #     super(Container,
     #           self).__before_publishing_traverse__(arg1, arg2)
+
+
+def blog_added(ob, event):
+    # inside blogs you can't add blogs
+    ob.manage_permission("sc.blog: Add Blog")
+
