@@ -22,11 +22,16 @@ class View(dexterity.DisplayForm):
     grok.require('zope2.View')
 
     def query_portal_types(self):
+        """ Returns the portal types than should be displayed
+            as post entries inside a Blog.
+            'Image', 'File' & 'Folder' are excluded.
+        """
         plone_utils = getToolByName(self.context, 'plone_utils')
         types = plone_utils.getUserFriendlyTypes()
         for t in ('Image', 'File', 'Folder'):  # XXX: hardcoded, please improve
             types.remove(t)
         return types
+
 
 class BlogSummaryView(dexterity.DisplayForm):
     """Looks like a standard Folder Summary View.
@@ -49,6 +54,9 @@ class BlogHeader(grok.Viewlet):
     grok.viewletmanager(IAboveContent)
 
     def update(self):
+        """ check if we are inside a Blog, if its true
+            set it into self.blog
+        """
         self.context = aq_inner(self.context)
         self.blog = None
         # is context a Blog or inside a Blog?
@@ -60,7 +68,11 @@ class BlogHeader(grok.Viewlet):
                 break
 
     def available(self):
+        """ return True if we're inside a Blog.
+        """
         return bool(self.blog)
 
     def blog_url(self):
+        """ return the blog URL.
+        """
         return self.blog.absolute_url()
