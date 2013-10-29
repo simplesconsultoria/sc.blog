@@ -5,7 +5,6 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
-from sc.blog.browser import post
 from sc.blog.content import IBlog
 from sc.blog.testing import INTEGRATION_TESTING
 from zope.component import createObject
