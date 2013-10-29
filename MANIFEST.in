@@ -1,6 +1,4 @@
 include *.rst
-
-recursive-include src *
-recursive-include docs *
-
+graft docs
+graft src
 global-exclude *.pyc
