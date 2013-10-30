@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from collective.nitf.interfaces import INITFLayer
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
-from sc.blog.browser import post
 from sc.blog.content import IBlog
 from sc.blog.testing import INTEGRATION_TESTING
 from zope.component import createObject
 from zope.component import queryUtility
-from zope.interface import alsoProvides
+from plone.app.content.browser.folderfactories import _allowedTypes
 
 import unittest
 
@@ -53,16 +51,13 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IReferenceable.providedBy(self.b1))
         self.assertTrue(IAttributeUUID.providedBy(self.b1))
 
-    def test_post_view(self):
-        self.b1.invokeFactory('collective.nitf.content', 'n1')
-        # provide the nitf layer...
-        alsoProvides(self.layer['request'], INITFLayer)
-        view = self.b1.n1.unrestrictedTraverse("view")
-        # nitf standard view
-        self.assertFalse(isinstance(view, post.View))
-        # XXX: simulate a traverse
-        self.layer['request']['TraversalRequestNameStack'] = []
-        self.b1.__before_publishing_traverse__(self.layer['request'])
-        view = self.b1.n1.unrestrictedTraverse("view")
-        # nitf post view
-        self.assertTrue(isinstance(view, post.View))
+    def test_subblog(self):
+        """ test than Blogs are not allowed inside Blogs
+        """
+        request = self.layer['request']
+        # Blogs can't contain Blogs
+        self.assertTrue('Blog' in [i.id for i in _allowedTypes(request, self.folder)])
+        self.assertFalse('Blog' in [i.id for i in _allowedTypes(request, self.b1)])
+        # not allowed in subobjects too
+        self.b1.invokeFactory('Folder', 'subfolder')
+        self.assertFalse('Blog' in [i.id for i in _allowedTypes(request, self.b1.subfolder)])

@@ -9,10 +9,8 @@
   <property name="content_icon">++resource++sc.blog/blog-icon.png</property>
   <property name="allow_discussion">False</property>
   <property name="global_allow">True</property>
-  <property name="filter_content_types">True</property>
-  <property name="allowed_content_types">
-    <element value="collective.nitf.content" />
-  </property>
+  <property name="filter_content_types">False</property>
+  <property name="allowed_content_types"/>
 
   <!-- schema interface -->
   <property name="schema">sc.blog.content.IBlog</property>

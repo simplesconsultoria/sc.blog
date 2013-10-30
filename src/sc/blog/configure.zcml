@@ -30,4 +30,10 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <subscriber
+      handler=".content.blog_added"
+      for=".content.IBlog
+           zope.lifecycleevent.interfaces.IObjectAddedEvent"
+      />
+
 </configure>
