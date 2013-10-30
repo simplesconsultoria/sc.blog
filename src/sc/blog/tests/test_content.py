@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from plone.app.content.browser.folderfactories import _allowedTypes
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -9,7 +10,6 @@ from sc.blog.content import IBlog
 from sc.blog.testing import INTEGRATION_TESTING
 from zope.component import createObject
 from zope.component import queryUtility
-from plone.app.content.browser.folderfactories import _allowedTypes
 
 import unittest
 
