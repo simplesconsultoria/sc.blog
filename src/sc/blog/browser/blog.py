@@ -33,7 +33,7 @@ class View(dexterity.DisplayForm):
         return types
 
 
-class BlogSummaryView(dexterity.DisplayForm):
+class BlogSummaryView(View):
     """Looks like a standard Folder Summary View.
     """
     grok.context(IBlog)
