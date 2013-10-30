@@ -10,8 +10,7 @@ Life, the Universe, and Everything
 This package includes a content type, views and viewlets to represent a blog
 inside a Plone site.
 
-Posts are represented by instances of News Articles as defined in the
-`collective.nitf`_ package.
+Any content type inside a blog (except Image, File and Folder) can be a post.
 
 Mostly Harmless
 ---------------
@@ -56,14 +55,14 @@ Usage
 
 Just install the package and start adding Blogs and Posts.
 
-A blog has an associated image that is shown in a viewlet located below the
-breadcrumb.
+A blog may have an associated image that is shown in a viewlet located below
+the breadcrumb.
 
 TODO List
 ^^^^^^^^^
 
-* Add a portlet with a Tag Cloud of tags in posts
-* Add a portlet with a list of posts in the blog
+* Navigation portlet listing posts on chronological order (refs. `#4`_)
+* Tag Cloud portlet listing tags in posts (refs. `#6`_)
 
 Not entirely unlike
 -------------------
@@ -94,6 +93,8 @@ Not entirely unlike
     entire body. It's up to the user to limit those results in an intelligent
     way so that page loads doesn't take too long.
 
+.. _`#4`: https://github.com/simplesconsultoria/sc.blog/issues/4
+.. _`#6`: https://github.com/simplesconsultoria/sc.blog/issues/6
 .. _`blog.star`: https://pypi.python.org/pypi/collective.blog.star
 .. _`collective.nitf`: https://github.com/collective/collective.nitf
 .. _`ftw.blog`: https://pypi.python.org/pypi/ftw.blog

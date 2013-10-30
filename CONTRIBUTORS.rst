@@ -1,12 +1,16 @@
 Share and Enjoy
 ---------------
 
-collective.nitf would not have been possible without the contribution of the
+``sc.blog`` would not have been possible without the contribution of the
 following people:
 
 - Héctor Velarde
-- Brendan Mitchell (`icon`_)
+- `Brendan Mitchell`_ (icon)
 
-Development sponsored by Simples Consultoria.
+You can find an updated list of package contributors on `GitHub`_.
 
-.. _`icon`: http://www.theblogicon.com/
+Development sponsored by `Simples Consultoria`_.
+
+.. _`Brendan Mitchell`: http://www.theblogicon.com/
+.. _`GitHub`: https://github.com/simplesconsultoria/sc.blog/contributors
+.. _`Simples Consultoria`: http://www.simplesconsultoria.com.br/
