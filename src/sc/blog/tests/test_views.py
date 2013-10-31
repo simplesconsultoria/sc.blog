@@ -23,6 +23,7 @@ class ViewsTestCase(unittest.TestCase):
         self.b1.invokeFactory('Document', 'doc1')
         self.b1.invokeFactory('News Item', 'news1')
         self.b1.invokeFactory('Folder', 'folder1')
+        self.b1.folder1.invokeFactory('Document', 'doc1.1')
         transaction.commit()
 
     def test_default_view(self):
@@ -41,6 +42,7 @@ class ViewsTestCase(unittest.TestCase):
         self.assertTrue('<a href="http://nohost/plone/b1/doc1" class="summary url"></a>' in browser.contents)
         self.assertTrue('<a href="http://nohost/plone/b1/news1" class="summary url"></a>' in browser.contents)
         self.assertFalse('<a href="http://nohost/plone/b1/folder1" class="summary url"></a>' in browser.contents)
+        self.assertTrue('<a href="http://nohost/plone/b1/folder1/doc1.1" class="summary url"></a>' in browser.contents)
 
     def test_blog_summary_view(self):
         """ Test blog_summary_view
@@ -58,3 +60,4 @@ class ViewsTestCase(unittest.TestCase):
         self.assertTrue('<a href="http://nohost/plone/b1/doc1" class="summary url">doc1</a>' in browser.contents)
         self.assertTrue('<a href="http://nohost/plone/b1/news1" class="summary url">news1</a>' in browser.contents)
         self.assertFalse('<a href="http://nohost/plone/b1/folder1" class="summary url">folder1</a>' in browser.contents)
+        self.assertTrue('<a href="http://nohost/plone/b1/folder1/doc1.1" class="summary url">doc1.1</a>' in browser.contents)

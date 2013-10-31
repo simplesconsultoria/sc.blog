@@ -24,11 +24,11 @@ class View(dexterity.DisplayForm):
     def query_portal_types(self):
         """ Returns the portal types than should be displayed
             as post entries inside a Blog.
-            'Image', 'File' & 'Folder' are excluded.
+            'Image', 'File', 'Folder' & 'Blog' are excluded.
         """
         plone_utils = getToolByName(self.context, 'plone_utils')
         types = plone_utils.getUserFriendlyTypes()
-        for t in ('Image', 'File', 'Folder'):  # XXX: hardcoded, please improve
+        for t in ('Image', 'File', 'Folder', 'Blog'):  # XXX: hardcoded, please improve
             types.remove(t)
         return types
 
