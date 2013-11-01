@@ -6,7 +6,12 @@ There's a frood who really knows where his towel is.
 1.0a6 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- RobotFramework tests (closes `#7`_). [jpgimenez]
+
+- Implements recursion into views to display posts than there are inside
+  subfolders of the blog (closes `#5`_). [jpgimenez]
+
+- Fix blog_summary_view (closes `#3`_). [jpgimenez]
 
 
 1.0a5 (2013-10-30)
@@ -50,3 +55,7 @@ There's a frood who really knows where his towel is.
 ^^^^^^^^^^^^^^^^^^
 
 - Initial release.
+
+.. _`#3`: https://github.com/simplesconsultoria/sc.blog/issues/3
+.. _`#5`: https://github.com/simplesconsultoria/sc.blog/issues/5
+.. _`#7`: https://github.com/simplesconsultoria/sc.blog/issues/7
