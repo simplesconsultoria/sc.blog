@@ -96,4 +96,4 @@ Create Blog, subobjects and test views
     Click Button  Delete
     Page Should Contain  Plone site
     Go to Homepage
-    Page Should Not Contain  It's a Blog
+    Page Should Not Contain Element  css=#portaltab-its-a-blog
