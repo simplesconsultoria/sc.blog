@@ -41,16 +41,16 @@ Create Blog, subobjects and test views
     Open Add New Menu
     Click Link  css=a#document
     Page Should Contain  Add Page
-    Input Text  css=#title  It's a Post
+    Input Text  css=#title  First Post
     Click Button  Save
     Page Should Contain  Changes saved
 
     # verify the post is listed in the blog
     Click Link  link=It's a Blog
-    Page Should Contain  It's a Post
+    Page Should Contain  First Post
 
     # open the post
-    Click Link  link=It's a Post
+    Click Link  link=First Post
     # verify the blog header is visible
     Element Should Be Visible  css=#blog-header
 
@@ -67,17 +67,17 @@ Create Blog, subobjects and test views
     Open Add New Menu
     Click Link  css=a#document
     Page Should Contain  Add Page
-    Input Text  css=#title  It's a SubPost
+    Input Text  css=#title  Second Post
     Click Button  Save
     Page Should Contain  Changes saved
 
     # verify the second post is listed in the blog
     Click Link  link=It's a Blog
-    Page Should Contain  It's a Post
-    Page Should Contain  It's a SubPost
+    Page Should Contain  First Post
+    Page Should Contain  Second Post
 
     # open the second post
-    Click Link  link=It's a SubPost
+    Click Link  link=Second Post
     # verify the blog header is visible
     Element Should Be Visible  css=#blog-header
 
@@ -87,8 +87,8 @@ Create Blog, subobjects and test views
     Click Link  css=a#plone-contentmenu-display-blog_summary_view
 
     # verify the new view
-    Page Should Contain  It's a Post
-    Page Should Contain  It's a SubPost
+    Page Should Contain  First Post
+    Page Should Contain  Second Post
 
     # delete the blog
     Open Action Menu

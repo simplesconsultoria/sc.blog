@@ -62,7 +62,7 @@ class RobotFixture(Fixture):
 
     def setUpPloneSite(self, portal):
         super(RobotFixture, self).setUpPloneSite(portal)
-        open('/tmp/img1.jpg', 'w').write(generate_jpeg(50, 50))
+        open('/tmp/img1.jpg', 'w').write(generate_jpeg(970, 90))
 
 
 FIXTURE = Fixture()
