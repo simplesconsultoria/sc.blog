@@ -51,6 +51,10 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IReferenceable.providedBy(self.b1))
         self.assertTrue(IAttributeUUID.providedBy(self.b1))
 
+    def test_supports_object_relations(self):
+        from plone.app.relationfield.behavior import IRelatedItems
+        self.assertTrue(IRelatedItems.providedBy(self.blog))
+
     def test_subblog(self):
         """ test than Blogs are not allowed inside Blogs
         """

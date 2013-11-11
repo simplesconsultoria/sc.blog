@@ -6,6 +6,8 @@ There's a frood who really knows where his towel is.
 1.0a6 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Add support for object relations. [hvelarde]
+
 - RobotFramework tests (closes `#7`_). [jpgimenez]
 
 - Implements recursion into views to display posts than there are inside

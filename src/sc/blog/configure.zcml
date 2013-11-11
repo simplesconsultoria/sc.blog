@@ -8,6 +8,7 @@
     i18n_domain="sc.blog">
 
   <includeDependencies package="." />
+  <include package="plone.app.relationfield" />
   <i18n:registerTranslations directory="locales" />
 
   <permission
