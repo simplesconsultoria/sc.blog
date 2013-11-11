@@ -2,8 +2,9 @@
 
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.app.testing.interfaces import SITE_OWNER_NAME
+from plone.app.testing.interfaces import SITE_OWNER_PASSWORD
 from plone.testing.z2 import Browser
-from Products.PloneTestCase.setup import portal_owner, default_password
 from sc.blog.testing import FUNCTIONAL_TESTING
 
 import transaction
@@ -27,14 +28,12 @@ class ViewsTestCase(unittest.TestCase):
         transaction.commit()
 
     def test_default_view(self):
-        """ Test the default view
-        """
         browser = Browser(self.app)
         portal_url = self.portal.absolute_url()
          # Go admin
         browser.open(portal_url + "/login_form")
-        browser.getControl(name='__ac_name').value = portal_owner
-        browser.getControl(name='__ac_password').value = default_password
+        browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
+        browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
         browser.getControl(name='submit').click()
 
         browser.open('%s/b1' % portal_url)
@@ -45,14 +44,12 @@ class ViewsTestCase(unittest.TestCase):
         self.assertTrue('<a href="http://nohost/plone/b1/folder1/doc1.1" class="summary url"></a>' in browser.contents)
 
     def test_blog_summary_view(self):
-        """ Test blog_summary_view
-        """
         browser = Browser(self.app)
         portal_url = self.portal.absolute_url()
          # Go admin
         browser.open(portal_url + "/login_form")
-        browser.getControl(name='__ac_name').value = portal_owner
-        browser.getControl(name='__ac_password').value = default_password
+        browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
+        browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
         browser.getControl(name='submit').click()
 
         browser.open('%s/b1/blog_summary_view' % portal_url)
