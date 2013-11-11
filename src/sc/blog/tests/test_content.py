@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from plone.app.content.browser.folderfactories import _allowedTypes
+from plone import api
 from plone.app.referenceablebehavior.referenceable import IReferenceable
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
 from sc.blog.content import IBlog
@@ -21,16 +19,14 @@ class ContentTypeTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
 
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Folder', 'test-folder')
-        setRoles(self.portal, TEST_USER_ID, ['Member'])
-        self.folder = self.portal['test-folder']
+        with api.env.adopt_roles(['Manager']):
+            self.folder = api.content.create(
+                self.portal, 'Folder', 'test-folder')
 
-        self.folder.invokeFactory('Blog', 'b1')
-        self.b1 = self.folder['b1']
+        self.blog = api.content.create(self.folder, 'Blog', 'blog')
 
     def test_adding(self):
-        self.assertTrue(IBlog.providedBy(self.b1))
+        self.assertTrue(IBlog.providedBy(self.blog))
 
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name='Blog')
@@ -48,20 +44,23 @@ class ContentTypeTestCase(unittest.TestCase):
         self.assertTrue(IBlog.providedBy(new_object))
 
     def test_is_referenceable(self):
-        self.assertTrue(IReferenceable.providedBy(self.b1))
-        self.assertTrue(IAttributeUUID.providedBy(self.b1))
+        self.assertTrue(IReferenceable.providedBy(self.blog))
+        self.assertTrue(IAttributeUUID.providedBy(self.blog))
 
     def test_supports_object_relations(self):
         from plone.app.relationfield.behavior import IRelatedItems
         self.assertTrue(IRelatedItems.providedBy(self.blog))
 
-    def test_subblog(self):
-        """ test than Blogs are not allowed inside Blogs
-        """
+    def test_blogs_can_not_contain_blogs(self):
+        from plone.app.content.browser.folderfactories import _allowedTypes
         request = self.layer['request']
+
+        def allowed_types(container):
+            return [i.id for i in _allowedTypes(request, container)]
+
         # Blogs can't contain Blogs
-        self.assertTrue('Blog' in [i.id for i in _allowedTypes(request, self.folder)])
-        self.assertFalse('Blog' in [i.id for i in _allowedTypes(request, self.b1)])
+        self.assertIn('Blog', allowed_types(self.folder))
+        self.assertNotIn('Blog', allowed_types(self.blog))
         # not allowed in subobjects too
-        self.b1.invokeFactory('Folder', 'subfolder')
-        self.assertFalse('Blog' in [i.id for i in _allowedTypes(request, self.b1.subfolder)])
+        api.content.create(self.blog, 'Folder', 'subfolder')
+        self.assertNotIn('Blog', allowed_types(self.blog['subfolder']))

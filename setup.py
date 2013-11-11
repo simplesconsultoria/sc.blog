@@ -42,6 +42,7 @@ setup(name='sc.blog',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
+          'plone.api',
           'plone.app.dexterity [grok, relations]',
           'plone.app.layout',
           'plone.app.referenceablebehavior',

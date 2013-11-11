@@ -2,13 +2,13 @@
 
 from Acquisition import aq_inner
 from five import grok
+from plone import api
 from plone.app.layout.viewlets.interfaces import IAboveContent
 from plone.directives import dexterity
+from Products.CMFCore.interfaces import ISiteRoot
 from sc.blog.content import IBlog
 from sc.blog.interfaces import IBlogLayer
 from zope.interface import Interface
-from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.interfaces import ISiteRoot
 
 grok.templatedir('templates')
 
@@ -26,7 +26,7 @@ class View(dexterity.DisplayForm):
             as post entries inside a Blog.
             'Image', 'File', 'Folder' & 'Blog' are excluded.
         """
-        plone_utils = getToolByName(self.context, 'plone_utils')
+        plone_utils = api.portal.get_tool(name='plone_utils')
         types = plone_utils.getUserFriendlyTypes()
         for t in ('Image', 'File', 'Folder', 'Blog'):  # XXX: hardcoded, please improve
             types.remove(t)
