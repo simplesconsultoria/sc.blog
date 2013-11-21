@@ -6,7 +6,10 @@ There's a frood who really knows where his towel is.
 1.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
-- Nothing changed yet.
+- The method that returns the content types that are considered blog posts
+  was fixed and renamed from ``query_portal_types`` to
+  ``get_blog_friendly_types``.
+  [hvelarde]
 
 
 1.0b1 (2013-11-11)
