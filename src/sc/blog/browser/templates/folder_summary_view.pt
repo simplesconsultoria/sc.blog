@@ -11,7 +11,7 @@
     <metal:content-core fill-slot="content-core"
         tal:define="contentFilter python:{'sort_on': 'effective', 'sort_order': 'descending',
                                           'portal_type': view.get_blog_friendly_types(),
-                                          'path': {'query': context.absolute_url_path(), 'depth': -1}};
+                                          'path': {'query': '/'.join(context.getPhysicalPath()), 'depth': -1}};
                     limit_display python:10">
         <metal:block define-macro="listing" extend-macro="context/folder_listing/macros/content-core">
             <!-- we don't want the dl -->
