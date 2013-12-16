@@ -97,3 +97,40 @@ Create Blog, subobjects and test views
     Page Should Contain  Plone site
     Go to Homepage
     Page Should Not Contain Element  css=#portaltab-its-a-blog
+
+
+Create Blog test views using VHM
+    Enable Autologin as  Site Administrator
+    Go to Homepage
+
+    # create a blog without image
+    Open Add New Menu
+    Click Link  css=a#blog
+    Page Should Contain  Add Blog
+    Input Text  css=#form-widgets-IDublinCore-title  BlogVHM
+    Input Text  css=#form-widgets-author  HJS
+    Click Button  Save
+    Page Should Contain  Item created
+
+    # add a post
+    Open Add New Menu
+    Click Link  css=a#document
+    Page Should Contain  Add Page
+    Input Text  css=#title  PostVHM
+    Click Button  Save
+    Page Should Contain  Changes saved
+
+    # verify the post is listed in the blog
+    Click Link  link=BlogVHM
+    Page Should Contain  PostVHM
+
+    # open the post
+    Click Link  link=PostVHM
+    # verify the blog header is visible
+    Element Should Be Visible  css=#blog-header
+
+    # open with VHM url
+    Open Browser  http://localhost:${ZOPE_PORT}/VirtualHostBase/http/127.0.0.1:${ZOPE_PORT}/VirtualHostRoot/plone/blogvhm
+    Page Should Contain  PostVHM
+    Click Link  link=PostVHM
+    Element Should Be Visible  css=#blog-header

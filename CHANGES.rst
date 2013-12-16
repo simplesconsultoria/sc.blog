@@ -6,6 +6,8 @@ There's a frood who really knows where his towel is.
 1.0b2 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Fix issue accessing blogs with VHM urls (closes `#9`_). [jpgimenez]
+
 - The method that returns the content types that are considered blog posts
   was fixed and renamed from ``query_portal_types`` to
   ``get_blog_friendly_types``.
@@ -70,3 +72,4 @@ There's a frood who really knows where his towel is.
 .. _`#3`: https://github.com/simplesconsultoria/sc.blog/issues/3
 .. _`#5`: https://github.com/simplesconsultoria/sc.blog/issues/5
 .. _`#7`: https://github.com/simplesconsultoria/sc.blog/issues/7
+.. _`#9`: https://github.com/simplesconsultoria/sc.blog/issues/9

@@ -60,6 +60,15 @@ class Fixture(PloneSandboxLayer):
 
 class RobotFixture(Fixture):
 
+    def setUpZope(self, app, configurationContext):
+        super(RobotFixture, self).setUpZope(app, configurationContext)
+        if 'virtual_hosting' not in app.objectIds():
+            # If ZopeLite was imported, we have no default virtual
+            # host monster
+            from Products.SiteAccess.VirtualHostMonster \
+                import manage_addVirtualHostMonster
+            manage_addVirtualHostMonster(app, 'virtual_hosting')
+
     def setUpPloneSite(self, portal):
         super(RobotFixture, self).setUpPloneSite(portal)
         open('/tmp/img1.jpg', 'w').write(generate_jpeg(970, 90))
