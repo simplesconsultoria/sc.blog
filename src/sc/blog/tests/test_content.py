@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
 from plone import api
+from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
 from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.dexterity.interfaces import IDexterityFTI
 from plone.uuid.interfaces import IAttributeUUID
@@ -42,6 +42,10 @@ class ContentTypeTestCase(unittest.TestCase):
         factory = fti.factory
         new_object = createObject(factory)
         self.assertTrue(IBlog.providedBy(new_object))
+
+    def test_can_be_excluded_from_navigation(self):
+        self.assertTrue(IExcludeFromNavigation.providedBy(self.blog))
+        self.assertTrue(hasattr(self.blog, 'exclude_from_nav'))
 
     def test_is_referenceable(self):
         self.assertTrue(IReferenceable.providedBy(self.blog))
