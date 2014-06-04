@@ -30,7 +30,7 @@ class ViewsTestCase(unittest.TestCase):
     def test_default_view(self):
         browser = Browser(self.app)
         portal_url = self.portal.absolute_url()
-         # Go admin
+        # Go admin
         browser.open(portal_url + "/login_form")
         browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
         browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
@@ -46,7 +46,7 @@ class ViewsTestCase(unittest.TestCase):
     def test_blog_summary_view(self):
         browser = Browser(self.app)
         portal_url = self.portal.absolute_url()
-         # Go admin
+        # Go admin
         browser.open(portal_url + "/login_form")
         browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
         browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
