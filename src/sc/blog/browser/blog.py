@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from Acquisition import aq_inner
 from five import grok
 from plone import api
@@ -11,12 +10,13 @@ from sc.blog.content import IBlog
 from sc.blog.interfaces import IBlogLayer
 from zope.interface import Interface
 
+
 grok.templatedir('templates')
 
 
 class View(dexterity.DisplayForm):
-    """Default view. Looks like a standard Folder Full View.
-    """
+    """Default view. Looks like a standard Folder Full View."""
+
     grok.context(IBlog)
     grok.layer(IBlogLayer)
     grok.template('folder_full_view')
@@ -36,8 +36,8 @@ class View(dexterity.DisplayForm):
 
 
 class BlogSummaryView(View):
-    """Looks like a standard Folder Summary View.
-    """
+    """Looks like a standard Folder Summary View."""
+
     grok.context(IBlog)
     grok.layer(IBlogLayer)
     grok.name('blog_summary_view')
@@ -70,11 +70,9 @@ class BlogHeader(grok.Viewlet):
                 break
 
     def available(self):
-        """ return True if we're inside a Blog.
-        """
+        """Check if we're inside a Blog."""
         return bool(self.blog)
 
     def blog_url(self):
-        """ return the blog URL.
-        """
+        """Return the blog URL."""
         return self.blog.absolute_url()

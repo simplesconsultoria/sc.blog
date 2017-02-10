@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing.interfaces import SITE_OWNER_NAME
@@ -31,30 +30,30 @@ class ViewsTestCase(unittest.TestCase):
         browser = Browser(self.app)
         portal_url = self.portal.absolute_url()
         # Go admin
-        browser.open(portal_url + "/login_form")
+        browser.open(portal_url + '/login_form')
         browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
         browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
         browser.getControl(name='submit').click()
 
-        browser.open('%s/b1' % portal_url)
+        browser.open(self.b1.absolute_url())
         self.assertEqual(browser.headers['status'], '200 Ok')
-        self.assertTrue('<a href="http://nohost/plone/b1/doc1" class="summary url"></a>' in browser.contents)
-        self.assertTrue('<a href="http://nohost/plone/b1/news1" class="summary url"></a>' in browser.contents)
-        self.assertFalse('<a href="http://nohost/plone/b1/folder1" class="summary url"></a>' in browser.contents)
-        self.assertTrue('<a href="http://nohost/plone/b1/folder1/doc1.1" class="summary url"></a>' in browser.contents)
+        self.assertIn('<a href="http://nohost/plone/b1/doc1" class="summary url"></a>', browser.contents)
+        self.assertIn('<a href="http://nohost/plone/b1/news1" class="summary url"></a>', browser.contents)
+        self.assertNotIn('<a href="http://nohost/plone/b1/folder1" class="summary url"></a>', browser.contents)
+        self.assertIn('<a href="http://nohost/plone/b1/folder1/doc1.1" class="summary url"></a>', browser.contents)
 
     def test_blog_summary_view(self):
         browser = Browser(self.app)
         portal_url = self.portal.absolute_url()
         # Go admin
-        browser.open(portal_url + "/login_form")
+        browser.open(portal_url + '/login_form')
         browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
         browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
         browser.getControl(name='submit').click()
 
-        browser.open('%s/b1/blog_summary_view' % portal_url)
+        browser.open(self.b1.absolute_url() + '/blog_summary_view')
         self.assertEqual(browser.headers['status'], '200 Ok')
-        self.assertTrue('<a href="http://nohost/plone/b1/doc1" class="summary url">doc1</a>' in browser.contents)
-        self.assertTrue('<a href="http://nohost/plone/b1/news1" class="summary url">news1</a>' in browser.contents)
-        self.assertFalse('<a href="http://nohost/plone/b1/folder1" class="summary url">folder1</a>' in browser.contents)
-        self.assertTrue('<a href="http://nohost/plone/b1/folder1/doc1.1" class="summary url">doc1.1</a>' in browser.contents)
+        self.assertIn('<a href="http://nohost/plone/b1/doc1" class="summary url">doc1</a>', browser.contents)
+        self.assertIn('<a href="http://nohost/plone/b1/news1" class="summary url">news1</a>', browser.contents)
+        self.assertNotIn('<a href="http://nohost/plone/b1/folder1" class="summary url">folder1</a>', browser.contents)
+        self.assertIn('<a href="http://nohost/plone/b1/folder1/doc1.1" class="summary url">doc1.1</a>', browser.contents)

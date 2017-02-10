@@ -20,10 +20,8 @@ try:
     pkg_resources.get_distribution('plone.app.contenttypes')
 except pkg_resources.DistributionNotFound:
     from plone.app.testing import PLONE_FIXTURE
-    DEXTERITY_ONLY = False
 else:
     from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE as PLONE_FIXTURE
-    DEXTERITY_ONLY = True
 
 IS_PLONE_5 = api.env.plone_version().startswith('5')
 
@@ -38,7 +36,7 @@ def generate_jpeg(width, height):
     yb = 1.5
     maxIt = 25  # max iterations allowed
     # image size
-    image = Image.new("RGB", (width, height))
+    image = Image.new('RGB', (width, height))
     c = complex(random.random() * 2.0 - 1.0, random.random() - 0.5)
 
     for y in range(height):
@@ -56,7 +54,7 @@ def generate_jpeg(width, height):
             image.putpixel((x, y), b * 65536 + g * 256 + r)
 
     output = StringIO()
-    image.save(output, format="PNG")
+    image.save(output, format='PNG')
     return output.getvalue()
 
 
@@ -77,10 +75,8 @@ class RobotFixture(Fixture):
     def setUpZope(self, app, configurationContext):
         super(RobotFixture, self).setUpZope(app, configurationContext)
         if 'virtual_hosting' not in app.objectIds():
-            # If ZopeLite was imported, we have no default virtual
-            # host monster
-            from Products.SiteAccess.VirtualHostMonster \
-                import manage_addVirtualHostMonster
+            # if ZopeLite was imported, we have no default virtual host monster
+            from Products.SiteAccess.VirtualHostMonster import manage_addVirtualHostMonster
             manage_addVirtualHostMonster(app, 'virtual_hosting')
 
     def setUpPloneSite(self, portal):
@@ -100,5 +96,5 @@ ROBOT_FIXTURE = RobotFixture()
 
 ROBOT_TESTING = FunctionalTesting(
     bases=(ROBOT_FIXTURE, AUTOLOGIN_LIBRARY_FIXTURE, z2.ZSERVER_FIXTURE),
-    name="sc.blog:Robot"
+    name='sc.blog:Robot',
 )

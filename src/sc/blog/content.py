@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from five import grok
 from plone.dexterity.content import Container
 from plone.directives import form
@@ -9,8 +8,7 @@ from zope import schema
 
 
 class IBlog(form.Schema):
-    """A Blog.
-    """
+    """A Blog."""
 
     author = schema.TextLine(
         title=_(u'Author'),
@@ -18,15 +16,14 @@ class IBlog(form.Schema):
     )
 
     image = NamedBlobImage(
-        title=_(u"Image"),
+        title=_(u'Image'),
         required=False,
     )
 
 
 class Blog(Container):
-    """A Blog is a container of News Articles.
-    """
-    grok.implements(IBlog)
+    """A Blog."""
+    grok.implements(IBlog)  # noqa: D001
 
 
 def blog_added(ob, event):
@@ -36,4 +33,4 @@ def blog_added(ob, event):
         of Blogs.
     """
     # inside blogs you can't add blogs
-    ob.manage_permission("sc.blog: Add Blog")
+    ob.manage_permission('sc.blog: Add Blog')
