@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plone.app.dexterity.behaviors.exclfromnav import IExcludeFromNavigation
-from plone.app.referenceablebehavior.referenceable import IReferenceable
 from plone.dexterity.interfaces import IDexterityFTI
-from plone.uuid.interfaces import IAttributeUUID
 from sc.blog.content import IBlog
 from sc.blog.testing import INTEGRATION_TESTING
 from zope.component import createObject
@@ -46,10 +44,6 @@ class ContentTypeTestCase(unittest.TestCase):
     def test_can_be_excluded_from_navigation(self):
         self.assertTrue(IExcludeFromNavigation.providedBy(self.blog))
         self.assertTrue(hasattr(self.blog, 'exclude_from_nav'))
-
-    def test_is_referenceable(self):
-        self.assertTrue(IReferenceable.providedBy(self.blog))
-        self.assertTrue(IAttributeUUID.providedBy(self.blog))
 
     def test_supports_object_relations(self):
         from plone.app.relationfield.behavior import IRelatedItems
