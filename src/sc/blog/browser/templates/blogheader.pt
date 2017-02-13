@@ -6,11 +6,11 @@
       i18n:domain="sc.blog">
 <body>
 
-<tal:viewlet condition="viewlet/available">
+<tal:viewlet condition="view/available">
   <div id="blog-header"
-      tal:define="blog nocall:viewlet/blog;
+      tal:define="blog nocall:view/blog;
                   blog_title blog/Title;
-                  blog_url viewlet/blog_url;
+                  blog_url view/blog_url;
                   image nocall:blog/image|nothing;
                   scale blog/@@images">
     <a href="" title="" tal:attributes="href blog_url; title blog_title">

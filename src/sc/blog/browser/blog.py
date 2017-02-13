@@ -1,26 +1,19 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
-from five import grok
 from plone import api
-from plone.app.layout.viewlets.interfaces import IAboveContent
-from plone.directives import dexterity
+from plone.app.layout.viewlets import ViewletBase
 from Products.CMFCore.interfaces import ISiteRoot
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from sc.blog.config import BLOG_BLACKLISTED_TYPES
 from sc.blog.content import IBlog
-from sc.blog.interfaces import IBlogLayer
-from zope.interface import Interface
 
 
-grok.templatedir('templates')
+class View(BrowserView):
 
-
-class View(dexterity.DisplayForm):
     """Default view. Looks like a standard Folder Full View."""
 
-    grok.context(IBlog)
-    grok.layer(IBlogLayer)
-    grok.template('folder_full_view')
-    grok.require('zope2.View')
+    index = ViewPageTemplateFile('templates/folder_full_view.pt')
 
     def get_blog_friendly_types(self):
         """Return the portal types than should be displayed as post entries
@@ -34,26 +27,25 @@ class View(dexterity.DisplayForm):
         blog_types = set(friendly_types) - set(BLOG_BLACKLISTED_TYPES)
         return tuple(blog_types)
 
+    def __call__(self):
+        return self.index()
+
 
 class BlogSummaryView(View):
+
     """Looks like a standard Folder Summary View."""
 
-    grok.context(IBlog)
-    grok.layer(IBlogLayer)
-    grok.name('blog_summary_view')
-    grok.template('folder_summary_view')
-    grok.require('zope2.View')
+    index = ViewPageTemplateFile('templates/folder_summary_view.pt')
+
+    def __call__(self):
+        return self.index()
 
 
-class BlogHeader(grok.Viewlet):
+class BlogHeader(ViewletBase):
+
     """A viewlet to include a header in the container (Blog) and contained
     (News Article) elements.
     """
-    grok.name('sc.blog.blogheader')
-    grok.context(Interface)
-    grok.layer(IBlogLayer)
-    grok.require('zope2.View')
-    grok.viewletmanager(IAboveContent)
 
     def update(self):
         """ check if we are inside a Blog, if its true

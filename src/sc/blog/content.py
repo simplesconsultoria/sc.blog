@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from five import grok
 from plone.dexterity.content import Container
-from plone.directives import form
 from plone.namedfile.field import NamedBlobImage
+from plone.supermodel import model
 from sc.blog import _
 from zope import schema
+from zope.interface import implementer
 
 
-class IBlog(form.Schema):
+class IBlog(model.Schema):
     """A Blog."""
 
     author = schema.TextLine(
@@ -21,9 +21,9 @@ class IBlog(form.Schema):
     )
 
 
+@implementer(IBlog)
 class Blog(Container):
     """A Blog."""
-    grok.implements(IBlog)  # noqa: D001
 
 
 def blog_added(ob, event):

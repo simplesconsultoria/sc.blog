@@ -6,6 +6,9 @@ There's a frood who really knows where his towel is.
 1.0b4 (unreleased)
 ^^^^^^^^^^^^^^^^^^
 
+- Remove dependency on five.grok (closes `#11`_).
+  [rodfersou]
+
 - Remove hard dependency on plone.app.referenceablebehavior as Archetypes is no longer the default framework in Plone 5.
   Under Plone < 5.0 you should now explicitly add it to the `eggs` part of your buildout configuration to avoid issues while upgrading.
   [hvelarde]
@@ -88,3 +91,4 @@ There's a frood who really knows where his towel is.
 .. _`#5`: https://github.com/simplesconsultoria/sc.blog/issues/5
 .. _`#7`: https://github.com/simplesconsultoria/sc.blog/issues/7
 .. _`#9`: https://github.com/simplesconsultoria/sc.blog/issues/9
+.. _`#11`: https://github.com/simplesconsultoria/sc.blog/issues/11
