@@ -3,7 +3,7 @@ Changelog
 
 There's a frood who really knows where his towel is.
 
-1.0b4 (unreleased)
+1.1b1 (2017-02-16)
 ^^^^^^^^^^^^^^^^^^
 
 - Drop support for Python 2.6.
