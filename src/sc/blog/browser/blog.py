@@ -3,17 +3,25 @@ from Acquisition import aq_inner
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
 from Products.CMFCore.interfaces import ISiteRoot
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from sc.blog.config import BLOG_BLACKLISTED_TYPES
 from sc.blog.content import IBlog
 
+import pkg_resources
 
-class View(BrowserView):
+
+try:
+    pkg_resources.get_distribution('plone.app.contenttypes')
+except pkg_resources.DistributionNotFound:
+    # Don`t have plone.app.contenttypes
+    from Products.Five.browser import BrowserView as ViewBase
+else:
+    # Has plone.app.contenttypes
+    from plone.app.contenttypes.browser.folder import FolderView as ViewBase
+
+
+class View(ViewBase):
 
     """Default view. Looks like a standard Folder Full View."""
-
-    index = ViewPageTemplateFile('templates/folder_full_view.pt')
 
     def get_blog_friendly_types(self):
         """Return the portal types than should be displayed as post entries
@@ -26,16 +34,6 @@ class View(BrowserView):
         friendly_types = plone_utils.getUserFriendlyTypes()
         blog_types = set(friendly_types) - set(BLOG_BLACKLISTED_TYPES)
         return tuple(blog_types)
-
-    def __call__(self):
-        return self.index()
-
-
-class BlogSummaryView(View):
-
-    """Looks like a standard Folder Summary View."""
-
-    index = ViewPageTemplateFile('templates/folder_summary_view.pt')
 
     def __call__(self):
         return self.index()

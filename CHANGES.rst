@@ -12,6 +12,9 @@ There's a frood who really knows where his towel is.
 1.1b1 (2017-02-16)
 ^^^^^^^^^^^^^^^^^^
 
+- Fix view when plone.app.contenttypes is installed (closes `#16`_).
+  [rodfersou]
+
 - Drop support for Python 2.6.
   [hvelarde]
 
@@ -101,3 +104,4 @@ There's a frood who really knows where his towel is.
 .. _`#7`: https://github.com/simplesconsultoria/sc.blog/issues/7
 .. _`#9`: https://github.com/simplesconsultoria/sc.blog/issues/9
 .. _`#11`: https://github.com/simplesconsultoria/sc.blog/issues/11
+.. _`#16`: https://github.com/simplesconsultoria/sc.blog/issues/16

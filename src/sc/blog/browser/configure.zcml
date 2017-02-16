@@ -9,6 +9,7 @@
       for="..content.IBlog"
       name="view"
       class=".blog.View"
+      template="templates/folder_full_view.pt"
       permission="zope2.View"
       layer="..interfaces.IBlogLayer"
       />
@@ -16,7 +17,8 @@
   <browser:page
       for="..content.IBlog"
       name="blog_summary_view"
-      class=".blog.BlogSummaryView"
+      class=".blog.View"
+      template="templates/folder_summary_view.pt"
       permission="zope2.View"
       layer="..interfaces.IBlogLayer"
       />
