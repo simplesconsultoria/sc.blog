@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing.interfaces import SITE_OWNER_NAME
@@ -24,6 +25,17 @@ class ViewsTestCase(unittest.TestCase):
         self.b1.invokeFactory('News Item', 'news1')
         self.b1.invokeFactory('Folder', 'folder1')
         self.b1.folder1.invokeFactory('Document', 'doc1.1')
+
+        # https://github.com/collective/collective.nitf/issues/178
+        from collective.nitf.testing import get_image
+        from collective.nitf.testing import IMAGES
+        from collective.nitf.tests.api_hacks import set_image_field
+
+        # news article with lead image
+        obj = api.content.create(self.b1, 'collective.nitf.content', 'n1')
+        api.content.create(obj, 'Image', 'img1')
+        set_image_field(obj['img1'], get_image(IMAGES[0]), 'image/jpeg')
+
         transaction.commit()
 
     def test_default_view(self):
@@ -41,6 +53,9 @@ class ViewsTestCase(unittest.TestCase):
         self.assertIn('<a href="http://nohost/plone/b1/news1" class="summary url"></a>', browser.contents)
         self.assertNotIn('<a href="http://nohost/plone/b1/folder1" class="summary url"></a>', browser.contents)
         self.assertIn('<a href="http://nohost/plone/b1/folder1/doc1.1" class="summary url"></a>', browser.contents)
+
+        # Test lead image
+        self.assertIn('id="media"', browser.contents)
 
     def test_blog_summary_view(self):
         browser = Browser(self.app)
